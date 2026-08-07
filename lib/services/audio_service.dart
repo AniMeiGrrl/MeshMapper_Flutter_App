@@ -58,9 +58,11 @@ class AudioService {
         final session = await AudioSession.instance;
         await session.configure(
           const AudioSessionConfiguration(
-            // iOS: ambient category plays alongside other audio
-            avAudioSessionCategory: AVAudioSessionCategory.ambient,
-            avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.none,
+            // iOS: playback supports background audio. mixWithOthers keeps
+            // music, podcasts, and navigation audio playing under ping sounds.
+            avAudioSessionCategory: AVAudioSessionCategory.playback,
+            avAudioSessionCategoryOptions:
+                AVAudioSessionCategoryOptions.mixWithOthers,
             avAudioSessionMode: AVAudioSessionMode.defaultMode,
             avAudioSessionRouteSharingPolicy:
                 AVAudioSessionRouteSharingPolicy.defaultPolicy,
@@ -261,8 +263,9 @@ class AudioService {
       final session = await AudioSession.instance;
       await session.configure(
         const AudioSessionConfiguration(
-          avAudioSessionCategory: AVAudioSessionCategory.ambient,
-          avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.none,
+          avAudioSessionCategory: AVAudioSessionCategory.playback,
+          avAudioSessionCategoryOptions:
+              AVAudioSessionCategoryOptions.mixWithOthers,
           avAudioSessionMode: AVAudioSessionMode.defaultMode,
           avAudioSessionRouteSharingPolicy:
               AVAudioSessionRouteSharingPolicy.defaultPolicy,
